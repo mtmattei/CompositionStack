@@ -15,11 +15,15 @@ CompositionStack/
     README.md
     CLAUDE.md
     .mcp.json
-    ux-flows.md
-    design.md
-    interactions.md
-    architecture.md
-    plan.md
+    .claude/
+      settings.json
+      settings.local.json
+    docs/
+      ARCHITECTURE.md
+      DESIGN-BRIEF.md
+      INTERACTION-SPEC.md
+      UX-FLOWS.md
+      PLAN.md
 ```
 
 The `example/` folder contains all eight files filled in as if a fictional Uno Platform app called **FieldKit** were using them. FieldKit isn't a real product. It exists only to give the templates something concrete to talk about — colors, animations, phases, decisions — so readers see what a *filled* brief looks like, not a list of blanks.
@@ -31,13 +35,13 @@ The `example/` folder contains all eight files filled in as if a fictional Uno P
 | **Foundation** | [`README.md`](./example/README.md) | What is this? Who is it for? How do I run it? |
 | **Foundation** | [`CLAUDE.md`](./example/CLAUDE.md) | How do we do things here? What have we already decided? |
 | **Wiring** | [`.mcp.json`](./example/.mcp.json) | What tools can the agent actually call? |
-| **Wiring** | [`ux-flows.md`](./example/ux-flows.md) | What are the primary paths users take through the product? |
-| **Design System** | [`design.md`](./example/design.md) | What does the product look like? |
-| **Interactions** | [`interactions.md`](./example/interactions.md) | How does the product feel? |
-| **Architecture** | [`architecture.md`](./example/architecture.md) | How is the product built? |
-| **Plan** | [`plan.md`](./example/plan.md) | What are we building next, and what are we explicitly *not* building? |
+| **Wiring** | [`docs/UX-FLOWS.md`](./example/docs/UX-FLOWS.md) | What are the primary paths users take through the product? |
+| **Design System** | [`docs/DESIGN-BRIEF.md`](./example/docs/DESIGN-BRIEF.md) | What does the product look like? |
+| **Interactions** | [`docs/INTERACTION-SPEC.md`](./example/docs/INTERACTION-SPEC.md) | How does the product feel? |
+| **Architecture** | [`docs/ARCHITECTURE.md`](./example/docs/ARCHITECTURE.md) | How is the product built? |
+| **Plan** | [`docs/PLAN.md`](./example/docs/PLAN.md) | What are we building next, and what are we explicitly *not* building? |
 
-Eight files, six surfaces. The README + CLAUDE pair is the *Foundation* — most projects need both. The `.mcp.json` + `ux-flows.md` pair is the *Wiring* — one is for the agent, one is for everyone.
+Eight files, six surfaces. The `README.md` + `CLAUDE.md` pair lives at the project root — that's the *Foundation*, the first thing any teammate or agent reads. The `.mcp.json` + `UX-FLOWS.md` pair is the *Wiring* — one is for the agent, one is for everyone. The remaining four briefs live in `docs/` because they're reference material, read on-demand when the task touches them.
 
 ## How to use it
 
@@ -45,7 +49,7 @@ Eight files, six surfaces. The README + CLAUDE pair is the *Foundation* — most
 2. **Copy the eight files into your own project root** (or a `docs/` subfolder). Drop them anywhere your agent looks at session start.
 3. **Find-replace `FieldKit` to your product name.** The example content is there to show shape, not to be kept.
 4. **Rewrite each file with your project's truth.** A doc that says "we haven't decided yet" is better than a missing one — the agent stops guessing.
-5. **Keep them alive.** A confidently wrong `architecture.md` is worse than no `architecture.md`. When a decision changes, update the file in the same PR.
+5. **Keep them alive.** A confidently wrong `ARCHITECTURE.md` is worse than no `ARCHITECTURE.md`. When a decision changes, update the file in the same PR.
 
 ## What each file is shaped like
 

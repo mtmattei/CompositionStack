@@ -1,7 +1,7 @@
 <!-- ─── How to adapt ────────────────────────────────────────────────── -->
-<!-- interactions.md describes how the product *feels*: animations,      -->
+<!-- INTERACTION-SPEC.md describes how the product *feels*: animations,  -->
 <!-- transitions, state transitions, edge cases (loading / empty /        -->
-<!-- error). Visual rules live in design.md. This file is about motion    -->
+<!-- error). Visual rules live in DESIGN-BRIEF.md. This file is motion    -->
 <!-- and time.                                                            -->
 <!--                                                                      -->
 <!-- Make timing tokens, not magic numbers. Make state machines, not      -->
@@ -113,7 +113,7 @@ These are component-level, not page-level, except where the page itself is the u
 |---|---|
 | Loading (component) | Skeleton block sized to the expected content. Appears at 200ms. Never spinner-on-page. |
 | Loading (full-page) | Header renders immediately. Body is skeleton until ready. |
-| Empty | `EmptyState` component (see [design.md](./design.md#components)). One line, no CTA except for the first-run case. |
+| Empty | `EmptyState` component (see [DESIGN-BRIEF.md](./DESIGN-BRIEF.md#components)). One line, no CTA except for the first-run case. |
 | Error (component) | Inline message inside the component, with retry affordance. Don't bounce the user to a separate error page. |
 | Error (full-page) | Reserved for auth, network unreachable on cold start, and unhandled exceptions. Includes the "breathing" illustration. |
 

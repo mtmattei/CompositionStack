@@ -1,5 +1,5 @@
 <!-- ─── How to adapt ────────────────────────────────────────────────── -->
-<!-- design.md is the visual brief. Tokens, palette, typography,         -->
+<!-- DESIGN-BRIEF.md is the visual brief. Tokens, palette, typography,   -->
 <!-- spacing, components. The constraints that make a hundred screens    -->
 <!-- feel like one product.                                              -->
 <!--                                                                     -->
@@ -132,6 +132,6 @@ When you add a new component, run the WinUI contrast analyzer once before you ca
 
 ## What's not in this file
 
-- **Motion and timing.** See [`interactions.md`](./interactions.md).
+- **Motion and timing.** See [`INTERACTION-SPEC.md`](./INTERACTION-SPEC.md).
 - **Layout rules per page.** Components compose. If a page needs a new layout rule, that's a sign it should be expressed as a new component instead.
 - **Brand voice and copy tone.** Lives in the README's "Who it's for" section for now. Promote to a `voice.md` if FieldKit ever ships marketing copy.

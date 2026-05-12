@@ -27,13 +27,13 @@ Field service teams — HVAC, electrical, plumbing — who arrive at a job site,
 - **Inventory pick.** Tap or scan a part to add it to the job. Tap again to return it.
 - **Sync queue.** Everything queues locally. Sync runs in the background when connectivity returns.
 
-What it doesn't do yet: see [`plan.md`](./plan.md).
+What it doesn't do yet: see [`docs/PLAN.md`](./docs/PLAN.md).
 
 ## Stack
 
 - **.NET 10 / C# 14** — application code.
 - **Uno Platform (latest stable Uno.Sdk)** — cross-platform UI from one codebase.
-- **MVUX** — application state and async data flow. (For why not MVVM, see [`architecture.md`](./architecture.md).)
+- **MVUX** — application state and async data flow. (For why not MVVM, see [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md).)
 - **Uno.Extensions** — hosting, DI, navigation, authentication, HTTP, configuration, logging.
 - **Uno Toolkit + Material** — controls and theming.
 
@@ -70,19 +70,22 @@ FieldKit/
   Services/                 platform-agnostic services
   Platforms/                platform-specific code (#if ANDROID, etc.)
   Assets/                   images, fonts, app icons
-docs/
-  CLAUDE.md                 conventions, decision rules
-  architecture.md           how the code is organized
-  design.md                 visual language
-  interactions.md           motion + state rules
-  ux-flows.md               primary user paths
-  plan.md                   roadmap + non-goals
+CLAUDE.md                   conventions, decision rules
 .mcp.json                   agent tool registry
+.claude/
+  settings.json             permissions + hooks (dotnet format on .cs writes)
+  settings.local.json       personal overrides (gitignored)
+docs/
+  ARCHITECTURE.md           how the code is organized
+  DESIGN-BRIEF.md           visual language
+  INTERACTION-SPEC.md       motion + state rules
+  UX-FLOWS.md               primary user paths
+  PLAN.md                   roadmap + non-goals
 ```
 
 ## Status
 
-**Phase 1 in progress.** Read-only inventory view on Today/Job detail. Sync, edit, and barcode scanning are scoped but not built. See [`plan.md`](./plan.md) for the current cut line.
+**Phase 1 in progress.** Read-only inventory view on Today/Job detail. Sync, edit, and barcode scanning are scoped but not built. See [`docs/PLAN.md`](./docs/PLAN.md) for the current cut line.
 
 ## Contributing
 

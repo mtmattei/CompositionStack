@@ -26,11 +26,11 @@ Read this before you touch the code. Whether you're an engineer joining the team
 Read the file that matches the task. Don't read everything at session start.
 
 - [`README.md`](./README.md) — what FieldKit is, who it's for, how it runs.
-- [`architecture.md`](./architecture.md) — layer structure, MVUX/DI/navigation, where platform-specific code lives.
-- [`design.md`](./design.md) — tokens, palette, typography, spacing, components.
-- [`interactions.md`](./interactions.md) — motion philosophy, timing tokens, state machines per component.
-- [`ux-flows.md`](./ux-flows.md) — primary user paths (day-in-the-life, first-run, offline sync).
-- [`plan.md`](./plan.md) — phases, scope, don't-do list, open questions.
+- [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md) — layer structure, MVUX/DI/navigation, where platform-specific code lives.
+- [`docs/DESIGN-BRIEF.md`](./docs/DESIGN-BRIEF.md) — tokens, palette, typography, spacing, components.
+- [`docs/INTERACTION-SPEC.md`](./docs/INTERACTION-SPEC.md) — motion philosophy, timing tokens, state machines per component.
+- [`docs/UX-FLOWS.md`](./docs/UX-FLOWS.md) — primary user paths (day-in-the-life, first-run, offline sync).
+- [`docs/PLAN.md`](./docs/PLAN.md) — phases, scope, don't-do list, open questions.
 - This file (`CLAUDE.md`) — conventions, decision rules, gotchas.
 
 ## Conventions
@@ -40,13 +40,13 @@ Read the file that matches the task. Don't read everything at session start.
 - **Use `x:Bind`.** Use `{Binding}` only for `DataTemplate` scenarios where `x:Bind` doesn't work, and add a comment explaining why.
 - **One root layout per page.** A page with three nested `Grid`s wrapping a `StackPanel` is almost always wrong.
 - **Don't put logic in code-behind.** If a page has more than ~20 lines of `.xaml.cs`, push the logic into the MVUX model.
-- **Reuse styles. Never inline a color, a font size, or a thickness** that exists in [`design.md`](./design.md). If the token doesn't exist yet, add it to `design.md` in the same PR.
+- **Reuse styles. Never inline a color, a font size, or a thickness** that exists in [`docs/DESIGN-BRIEF.md`](./docs/DESIGN-BRIEF.md). If the token doesn't exist yet, add it to `DESIGN-BRIEF.md` in the same PR.
 - **Prefer Uno Toolkit controls** (`NavigationBar`, `TabBar`, `AutoLayout`, `SafeArea`) over raw WinUI equivalents — they handle responsiveness and safe areas correctly across platforms.
 - **Never inline user-facing strings.** Strings live in `Strings/<lang>/Resources.resw` and bind via `x:Uid`. Untranslatable identifiers (resource keys, log messages) can stay inline.
 
 ### Code
 
-- **MVUX is the default.** Use `IFeed<T>`, `IState<T>`, `IListFeed<T>` for app state. Use `FeedView` to bind. See [`architecture.md`](./architecture.md) for the decision rule.
+- **MVUX is the default.** Use `IFeed<T>`, `IState<T>`, `IListFeed<T>` for app state. Use `FeedView` to bind. See [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md) for the decision rule.
 - **`async` all the way down.** No `.Result`, no `.Wait()`, no `Task.Run` to escape sync-over-async — fix the call chain instead.
 - **One responsibility per service.** `IInventoryService` reads/writes inventory. It does not also do telemetry or auth.
 - **Don't catch exceptions you can't handle.** Let them bubble. The hosting layer logs them.
@@ -61,8 +61,8 @@ Read the file that matches the task. Don't read everything at session start.
 
 - **`Dispatcher.RunAsync` from a service.** Services are platform-agnostic. If you need to marshal back to the UI thread, do it at the binding layer or use an MVUX feed.
 - **Manual `INotifyPropertyChanged`.** MVUX states handle change notification. If you're reaching for `INotifyPropertyChanged`, you're in the wrong layer.
-- **Region-less navigation hacks.** All navigation flows through Uno.Extensions regions. See [`architecture.md`](./architecture.md).
-- **A new color "just for this one screen."** That color always ends up everywhere. Add to `design.md` or use what exists.
+- **Region-less navigation hacks.** All navigation flows through Uno.Extensions regions. See [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md).
+- **A new color "just for this one screen."** That color always ends up everywhere. Add to `DESIGN-BRIEF.md` or use what exists.
 
 ### Comments
 
@@ -80,13 +80,13 @@ The contract:
 
 | Situation | Decide | Ask |
 |---|---|---|
-| Token, style, or layout choice covered in [`design.md`](./design.md) | ✅ | |
+| Token, style, or layout choice covered in [`docs/DESIGN-BRIEF.md`](./docs/DESIGN-BRIEF.md) | ✅ | |
 | New token, new style, or visual deviation | | ✅ |
 | Adding a service / DI registration | ✅ | |
 | Adding a new external dependency | | ✅ |
-| Animation timing within ranges in [`interactions.md`](./interactions.md) | ✅ | |
+| Animation timing within ranges in [`docs/INTERACTION-SPEC.md`](./docs/INTERACTION-SPEC.md) | ✅ | |
 | New animation pattern | | ✅ |
-| Phase 1 work as scoped in [`plan.md`](./plan.md) | ✅ | |
+| Phase 1 work as scoped in [`docs/PLAN.md`](./docs/PLAN.md) | ✅ | |
 | Anything labeled "Phase 2/3" or "Non-goals" | | ✅ |
 | Refactor across more than three files | | ✅ |
 
@@ -128,6 +128,6 @@ A short log of choices that future-us would otherwise have to re-litigate. One e
 | 2026-04-22 | Uno.Extensions navigation regions, not raw `Frame` | Regions compose, support DI, and survive deeplinks. Same shell pattern across desktop/mobile. | Region attachment is a known footgun (see Known platform traps). |
 | 2026-04-30 | Material theme (MD3), not Fluent | Higher contrast tokens, better default touch sizing for the field-tech use case. | Visual mismatch with native Windows shell. Acceptable — utility app, not a Windows-first app. |
 | 2026-05-05 | Offline-first via local SQLite + sync queue | The user works in a basement or driveway. Connectivity is the exception. | Conflict resolution complexity. Constrained to "last write wins" until Phase 3. |
-| 2026-05-09 | Defer barcode scanning to Phase 3 | The platform-specific work (camera permissions, MAUI Essentials replacement) is half the cost of Phases 1+2 combined. Ship a working sync loop first. | None — explicitly scoped in `plan.md`. |
+| 2026-05-09 | Defer barcode scanning to Phase 3 | The platform-specific work (camera permissions, MAUI Essentials replacement) is half the cost of Phases 1+2 combined. Ship a working sync loop first. | None — explicitly scoped in `docs/PLAN.md`. |
 
 When this table passes ~20 rows, promote it to a standalone `decisions.md` and link from here.

@@ -1,5 +1,5 @@
 <!-- ─── How to adapt ────────────────────────────────────────────────── -->
-<!-- architecture.md is the *how it's built*. It captures the choices    -->
+<!-- ARCHITECTURE.md is the *how it's built*. It captures the choices    -->
 <!-- that every other layer of the stack assumes — DI shape, MVUX vs.   -->
 <!-- MVVM, navigation pattern, where async lives, where platform code   -->
 <!-- lives.                                                              -->
@@ -47,7 +47,7 @@ The single-project model is intentional. We don't split presentation, domain, an
 Why MVUX is the default here:
 
 - FieldKit is dominated by **async data flows** — paginated inventory, sync queue, push-driven updates. MVUX feeds (`IFeed<T>`, `IListFeed<T>`, `IState<T>`) handle these natively without manual `INotifyPropertyChanged` plumbing.
-- `FeedView` renders loading / ready / error / undefined from one binding. The brief on interactions ([`interactions.md`](./interactions.md)) assumes this is how those states get rendered.
+- `FeedView` renders loading / ready / error / undefined from one binding. The brief on interactions ([`INTERACTION-SPEC.md`](./INTERACTION-SPEC.md)) assumes this is how those states get rendered.
 - State-as-data fits the offline-first model: the sync layer mutates state, the UI reacts. We never reach into views to "refresh."
 
 Where MVVM still makes sense:
@@ -166,7 +166,7 @@ Single-producer, single-consumer. SQLite-backed `OutboxItem` rows with a state f
 - Retries with exponential backoff on transient failures.
 - Surfaces failure state via an `IState<SyncStatus>` that the chrome's `SyncBadge` binds to.
 
-Conflict policy (Phase 1–2): **last-write-wins server-side.** The reconcile UI in [`ux-flows.md`](./ux-flows.md) is informational, not interactive. We revisit when Phase 3 starts.
+Conflict policy (Phase 1–2): **last-write-wins server-side.** The reconcile UI in [`UX-FLOWS.md`](./UX-FLOWS.md) is informational, not interactive. We revisit when Phase 3 starts.
 
 ## Platform-specific code
 
@@ -199,7 +199,7 @@ When platform code is unavoidable, write the interface in `Services/` and the im
 
 ## What's not in this file
 
-- **Visual styling and tokens** — see [`design.md`](./design.md).
-- **Motion timings and state machines** — see [`interactions.md`](./interactions.md).
-- **What we're building when** — see [`plan.md`](./plan.md).
-- **Decisions log** — lives in [`CLAUDE.md`](./CLAUDE.md) until it earns its own file.
+- **Visual styling and tokens** — see [`DESIGN-BRIEF.md`](./DESIGN-BRIEF.md).
+- **Motion timings and state machines** — see [`INTERACTION-SPEC.md`](./INTERACTION-SPEC.md).
+- **What we're building when** — see [`PLAN.md`](./PLAN.md).
+- **Decisions log** — lives in [`CLAUDE.md`](../CLAUDE.md) until it earns its own file.

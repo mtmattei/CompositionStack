@@ -1,5 +1,5 @@
 <!-- ─── How to adapt ────────────────────────────────────────────────── -->
-<!-- ux-flows.md describes the *primary user paths* through your product. -->
+<!-- UX-FLOWS.md describes the *primary user paths* through your product. -->
 <!-- Not every screen. Not every edge case. The two or three flows that  -->
 <!-- a new teammate (or agent) needs to picture to understand the shape   -->
 <!-- of the product.                                                      -->
@@ -110,4 +110,4 @@ On conflict (rare): job-detail surfaces a "Reconcile" banner
 
 - **Settings screens.** They have their own flow, but it's secondary. Document them where they're built.
 - **Admin / dispatcher flows.** Out of scope for FieldKit-the-technician-app.
-- **Error screens.** Treated as states inside the flows above (see [`interactions.md`](./interactions.md) for the state machines).
+- **Error screens.** Treated as states inside the flows above (see [`INTERACTION-SPEC.md`](./INTERACTION-SPEC.md) for the state machines).
