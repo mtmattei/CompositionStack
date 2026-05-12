@@ -10,7 +10,7 @@
 
 # FieldKit
 
-A cross-platform inventory app for field service technicians. Built with .NET 9 and Uno Platform. Targets Windows desktop, iOS, and Android from a single codebase.
+A cross-platform inventory app for field service technicians. Built with .NET 10 and Uno Platform. Targets Windows desktop, iOS, and Android from a single codebase.
 
 ## Who it's for
 
