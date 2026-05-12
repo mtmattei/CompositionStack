@@ -27,7 +27,7 @@ What it doesn't do yet: see [`plan.md`](./plan.md).
 
 ## Stack
 
-- **.NET 9 / C# 13** — application code.
+- **.NET 10 / C# 14** — application code.
 - **Uno Platform (latest stable Uno.Sdk)** — cross-platform UI from one codebase.
 - **MVUX** — application state and async data flow. (For why not MVVM, see [`architecture.md`](./architecture.md).)
 - **Uno.Extensions** — hosting, DI, navigation, authentication, HTTP, configuration, logging.
@@ -46,13 +46,13 @@ To launch a target:
 
 ```bash
 # Windows desktop (default for day-to-day work)
-dotnet run --project FieldKit/FieldKit.csproj -f net9.0-desktop
+dotnet run --project FieldKit/FieldKit.csproj -f net10.0-desktop
 
 # iOS simulator
-dotnet build -t:Run -f net9.0-ios
+dotnet build -t:Run -f net10.0-ios
 
 # Android emulator
-dotnet build -t:Run -f net9.0-android
+dotnet build -t:Run -f net10.0-android
 ```
 
 ## Project layout

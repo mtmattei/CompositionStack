@@ -83,7 +83,7 @@ The contract:
 
 Before claiming a task is done:
 
-- [ ] `dotnet build` passes for `net9.0-desktop` with zero warnings introduced.
+- [ ] `dotnet build` passes for `net10.0-desktop` with zero warnings introduced.
 - [ ] If UI changed, ran the desktop target and exercised the changed path manually. Screenshot in PR.
 - [ ] If a brief changed, the change is in the same PR as the code.
 - [ ] No new file in `Platforms/` without a one-line comment explaining the platform-specific reason.

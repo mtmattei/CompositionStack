@@ -187,7 +187,7 @@ When platform code is unavoidable, write the interface in `Services/` and the im
 
 ## Testing strategy
 
-- **Unit tests** for services and MVUX models. Run on `net9.0` host. Mock external dependencies (API, repository) at the interface boundary.
+- **Unit tests** for services and MVUX models. Run on `net10.0` host. Mock external dependencies (API, repository) at the interface boundary.
 - **No mocked database** in repository tests. Use a temporary SQLite file. Mocks here have masked migration bugs before.
 - **No UI tests in Phase 1.** When Phase 2 lands, we add Uno UI Test on the desktop target only — covers ~95% of regressions at 5% of the cost of three-platform UI tests.
 
