@@ -21,16 +21,17 @@
 
 Read this before you touch the code. Whether you're an engineer joining the team or an agent picking up a task, the same rules apply.
 
-## Read order
+## Key references
 
-When in doubt, read in this sequence:
+Read the file that matches the task. Don't read everything at session start.
 
-1. [`README.md`](./README.md) — what FieldKit is.
-2. This file (`CLAUDE.md`) — how we work.
-3. [`architecture.md`](./architecture.md) — how the code is organized.
-4. The one brief that matches the task — `design.md`, `interactions.md`, `ux-flows.md`, or `plan.md`.
-
-Don't read everything at session start. Read what the task touches.
+- [`README.md`](./README.md) — what FieldKit is, who it's for, how it runs.
+- [`architecture.md`](./architecture.md) — layer structure, MVUX/DI/navigation, where platform-specific code lives.
+- [`design.md`](./design.md) — tokens, palette, typography, spacing, components.
+- [`interactions.md`](./interactions.md) — motion philosophy, timing tokens, state machines per component.
+- [`ux-flows.md`](./ux-flows.md) — primary user paths (day-in-the-life, first-run, offline sync).
+- [`plan.md`](./plan.md) — phases, scope, don't-do list, open questions.
+- This file (`CLAUDE.md`) — conventions, decision rules, gotchas.
 
 ## Conventions
 
@@ -40,6 +41,8 @@ Don't read everything at session start. Read what the task touches.
 - **One root layout per page.** A page with three nested `Grid`s wrapping a `StackPanel` is almost always wrong.
 - **Don't put logic in code-behind.** If a page has more than ~20 lines of `.xaml.cs`, push the logic into the MVUX model.
 - **Reuse styles. Never inline a color, a font size, or a thickness** that exists in [`design.md`](./design.md). If the token doesn't exist yet, add it to `design.md` in the same PR.
+- **Prefer Uno Toolkit controls** (`NavigationBar`, `TabBar`, `AutoLayout`, `SafeArea`) over raw WinUI equivalents — they handle responsiveness and safe areas correctly across platforms.
+- **Never inline user-facing strings.** Strings live in `Strings/<lang>/Resources.resw` and bind via `x:Uid`. Untranslatable identifiers (resource keys, log messages) can stay inline.
 
 ### Code
 
@@ -60,6 +63,16 @@ Don't read everything at session start. Read what the task touches.
 - **Manual `INotifyPropertyChanged`.** MVUX states handle change notification. If you're reaching for `INotifyPropertyChanged`, you're in the wrong layer.
 - **Region-less navigation hacks.** All navigation flows through Uno.Extensions regions. See [`architecture.md`](./architecture.md).
 - **A new color "just for this one screen."** That color always ends up everywhere. Add to `design.md` or use what exists.
+
+### Comments
+
+Three structured prefixes only. Anything else should be code, not a comment.
+
+- `TODO:` — work intended for the current branch or PR. Must be resolved before merge.
+- `REVIEW:` — something a human should sanity-check (e.g. "is this still referenced anywhere?").
+- `HACK:` — a known workaround. Include the reason and a link to the issue if there is one.
+
+Don't paraphrase what a function does in a comment above it. Well-named identifiers already do that.
 
 ## When to ask vs. when to decide
 
@@ -84,13 +97,15 @@ The contract:
 Before claiming a task is done:
 
 - [ ] `dotnet build` passes for `net10.0-desktop` with zero warnings introduced.
-- [ ] If UI changed, ran the desktop target and exercised the changed path manually. Screenshot in PR.
+- [ ] **If UI changed, launched via `uno_app_start` (from the `uno-app` MCP server) and exercised the changed path.** Take a screenshot with `uno_app_screenshot` and attach it to the PR. Fall back to `dotnet run -f net10.0-desktop` only if the MCP server is unavailable — and note that fact in the PR.
 - [ ] If a brief changed, the change is in the same PR as the code.
 - [ ] No new file in `Platforms/` without a one-line comment explaining the platform-specific reason.
 - [ ] No XAML resource literal that should be a token.
 - [ ] `dotnet format` is clean.
 
 This is the floor, not the ceiling. Type-check and tests verify *code correctness*, not *feature correctness*. If you can't actually use the feature, say so in the PR.
+
+**Why `uno_app_start` over a manual `dotnet run`.** The `uno-app` MCP server keeps the running app addressable from inside the agent loop — you can inspect the visual tree, read element properties, and screenshot without leaving the session. A manual run forces the agent to wait for human feedback, which is slower and lossier. Use the MCP path by default; only reach for `dotnet run` when you genuinely need a behavior the MCP server doesn't expose (e.g. perf profiling, native debugger).
 
 ## Known platform traps
 

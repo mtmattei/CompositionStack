@@ -1,26 +1,20 @@
 {
-  "$comment-1": "How to adapt: .mcp.json is the agent's tool registry. It tells the agent which external servers it can call during a session — your docs, your design system, your search index, your linter. Keep it short. Every entry should pull its weight. If you're not sure whether to add a server, leave it out; clutter here is worse than a missing tool.",
-  "$comment-2": "FieldKit example below: Uno docs MCP (always on for Uno work), Microsoft Learn docs (for .NET / WinUI reference), and a placeholder for a project-internal docs server. Replace or extend.",
+  "$comment-1": "How to adapt: .mcp.json is the agent's tool registry. It tells the agent which external servers it can call during a session. Keep it short. Every entry should pull its weight. Strip the $description fields once you've adapted this — they're for the template reader, not the runtime.",
+  "$comment-2": "FieldKit example below: the two official Uno Platform MCP servers — `uno` (remote: docs, troubleshooting, control reference) and `uno-app` (local: introspect a running Uno app via the dev server). Add or remove as your project needs.",
   "mcpServers": {
-    "uno-platform-docs": {
-      "$description": "Official Uno Platform docs, searchable + fetchable. Use for API patterns, control reference, troubleshooting, and the rule-init endpoints that gate-load Uno conventions.",
-      "command": "npx",
-      "args": ["-y", "@unoplatform/mcp-server"],
-      "env": {}
+    "uno": {
+      "$description": "Official Uno Platform docs server. Search and fetch Uno docs, control reference, troubleshooting guides, plus the rule-init endpoints that gate-load Uno conventions at session start.",
+      "url": "https://mcp.platform.uno/v1"
     },
-    "microsoft-learn": {
-      "$description": "Microsoft Learn search + fetch for .NET, C#, WinUI, and Azure docs.",
-      "command": "npx",
-      "args": ["-y", "@microsoft/mslearn-mcp"],
-      "env": {}
-    },
-    "internal-docs": {
-      "$description": "Placeholder for your project's internal docs server (Confluence, Notion, GitBook, or a local Markdown index). Delete if you don't have one.",
-      "command": "node",
-      "args": ["./tools/internal-docs-mcp/index.js"],
-      "env": {
-        "DOCS_ROOT": "${workspaceFolder}/docs"
-      }
+    "uno-app": {
+      "$description": "Local Uno dev-server MCP. Provides `uno_app_start` (preferred way to launch the app for verification — see CLAUDE.md), plus `uno_app_screenshot`, visual-tree inspection, and element property reads. Started on-demand via `dotnet dnx`; no separate install step.",
+      "command": "dotnet",
+      "args": [
+        "dnx",
+        "-y",
+        "uno.devserver",
+        "--mcp-app"
+      ]
     }
   }
 }
