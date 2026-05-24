@@ -2,7 +2,7 @@
 
 A starter set of context files for AI-assisted .NET / Uno Platform development.
 
-This repo is the companion to the blog post **"Composition Stack for AI-Assisted .NET Development."** It's not an application. There's no code to run. It's a set of markdown files that show what the six "surfaces" of an AI composition stack look like when they're filled in — so you can lift the *shape* and write your own.
+This repo is the companion to the blog post [**"Composition Stack for AI-Assisted .NET Development"**](https://platform.uno/blog/composition-stack-for-ai-assisted-net-development/). It's not an application. There's no code to run. It's a set of markdown files that show what the six "surfaces" of an AI composition stack look like when they're filled in — so you can lift the *shape* and write your own.
 
 > The point isn't the exact filenames. The point is the structure — six surfaces, each answering a different question, each addressable on its own.
 
